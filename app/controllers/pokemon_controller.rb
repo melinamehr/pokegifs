@@ -5,17 +5,12 @@ class PokemonController < ApplicationController
   body = JSON.parse(res.body)
 
   render json: {
-    results:[
-    body["name"],body["types"][0]['type']['name'], body["id"]
-    ]}
+    "name":body["name"],
+    "id":body["id"],
+    "type":body["types"].map do |type_hash|
+      type_hash["type"]["name"]
 
+        end
+    }
   end
 end
-
-
-
-  # body = JSON.parse(res.body)
-  # body["pokemon"]
-  #   puts poke["id"]
-  #   puts poke["name"]
-  #   puts poke ["type"]
